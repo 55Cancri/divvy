@@ -1,4 +1,4 @@
-#Dependencies#
+# Dependencies #
 body-parser
 cookie-parser
 debug"
@@ -8,12 +8,12 @@ node-sass-middleware
 pug
 serve-favicon
 
-#Dev Dependencies#
+# Dev Dependencies #
 babel-cli
 babel-eslint
 babel-preset-env
 eslint
 
-#dot files#
+# dot files #
 .babelrc
 .eslintrc
