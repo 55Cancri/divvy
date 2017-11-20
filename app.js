@@ -5,14 +5,14 @@ import favicon from 'serve-favicon'
 import logger from 'morgan'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
-import expressValidator from 'express-validator'
-import mongoose from 'mongoose'
 import sassMiddleware from 'node-sass-middleware'
 import stripe from 'stripe'
 
 // authentication modules
-import flash from 'express-flash-messages'
+// import flash from 'express-flash-messages'
+import flash from 'connect-flash'
 import session from 'express-session'
+import mongoose from 'mongoose'
 import connectMongo from 'connect-mongo'
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
@@ -24,6 +24,28 @@ import router from './routes/landing'
 import users from './routes/users'
 import profile from './routes/interface'
 
+
+
+// database connection
+mongoose.Promise = global.Promise
+mongoose.connect('mongodb://localhost/divvy', {
+  useMongoClient: true
+})
+.then(console.log("Successfully connected to database."))
+
+const gracefulExit = () => {
+  mongoose.connection.close(() => {
+    console.log('Disconnected from database.')
+    process.exit(0)
+  })
+}
+
+// if process ends, close database connection
+process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit)
+
+
+
+// start of app
 const app = express()
 
 // view engine setup
@@ -43,6 +65,32 @@ app.use(sassMiddleware({
   sourceMap: true
 }))
 app.use(express.static(path.join(__dirname, 'public')))
+
+// required for flash messages to work
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    // cookie expires after 3 hours and you logout
+    maxAge: 180 * 60 * 1000
+  }
+}))
+
+// must be below session cookie parser
+app.use(passport.initialize())
+app.use(passport.session())
+
+// need sessions configured in order work
+app.use(flash())
+
+// error_messages and success_messages are now global
+// they will be used in the pug "layout" file
+app.use((req, res, next) => {
+  res.locals.success_messages = req.flash('success')
+  res.locals.error_messages = req.flash('error')
+  next()
+})
 
 app.use('/', router)
 app.use('/users', users)

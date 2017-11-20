@@ -5,7 +5,17 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
   body
+    //- div(class="error-msg") for styling purposes
     div(class= "wrapper")
+
+      //- checks for flash errors at the top of each page
+      //- flash message is defined before each redirect
+      - if(error_messages.length > 0) {
+        div(class="error-msg") #{error_messages}
+      - }
+      - if(success_messages.length > 0) {
+        div(class="success-msg") #{success_messages}
+      - }
       block content
 
     block error-msg

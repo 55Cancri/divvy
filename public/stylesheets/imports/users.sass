@@ -10,6 +10,8 @@
 .registration-container p
   margin: 15px 0 5px 0
 
+
+.registration-container a,
 .registration-container p a:visited
   color: blue
 
@@ -28,18 +30,16 @@
 .registration-login input:not([type="submit"])
   height: 30px
   width: 100%
-  padding: 10px
+  padding: 5px 8px
   box-sizing: border-box
   border: 1px solid grey
   outline: none
   &:focus
-    border: none
-    letter-spacing: 1px
+    border: black solid 2px
     color: slate
-    background-color: lightgrey
 
-.registration-signup input[type="submit"],
-.registration-login input[type="submit"]
+.registration-signup button[type="submit"],
+.registration-login button[type="submit"]
   margin: 20px 0 0 0
   align-self: flex-end
   height: 35px

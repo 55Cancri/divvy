@@ -6,6 +6,7 @@
 @import "./imports/input"
 @import "./imports/accounts-list"
 @import "./imports/users"
+@import "./imports/errors"
 
 // universal
 
@@ -36,6 +37,10 @@ header
 .accounts-container
   grid-column: col-start / span 12
 
+.registration-container
+  grid-column: col-start 3 / span 8
+  grid-row: 3
+
 
 // desktop
 @media(min-width: 750px)
@@ -48,5 +53,5 @@ header
     grid-row: 2
 
   .registration-container
-    grid-column: col-start 5 / span 4
+    grid-column: col-start 4 / span 6
     grid-row: 8

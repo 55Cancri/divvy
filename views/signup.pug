@@ -4,8 +4,8 @@ block content
   div(class="registration-container")
     h1 Signup
     form(action="/users/signup" method="post" class="registration-signup")
-      label(for="fname") Name
-      input(type="fname" name="fname")
+      label(for="name") Name
+      input(type="name" name="name")
 
       label(for="email") Email
       input(type="email" name="email")
@@ -13,10 +13,10 @@ block content
       label(for="password") Password
       input(type="password" name="password")
 
-      label(for="password-match") Re-Enter Password
-      input(type="password" name="password-match")
+      label(for="confirmationPassword") Re-Enter Password
+      input(type="password" name="confirmationPassword")
 
-      input(type="submit" name="submit" value="finish")
+      button(type="submit") finish
 
     p(class="switch") Already have an account?&nbsp;
       a(href="/users/login") Login
