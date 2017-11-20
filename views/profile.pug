@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  include ./includes/header
+  include ./includes/input
+  include ./includes/accounts-list
+  script(src="/javascripts/profile.js")
+
+block error-msg
+  - if (error) {
+    include ./error.pug
+  - }

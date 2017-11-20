@@ -1,0 +1,44 @@
+
+.nav-list
+  display: none
+  align-items: center
+  list-style-type: none
+  margin: 0 0 50px 0        // change for mobile
+  height: 50px
+  background-color: black
+  li:first-child
+    margin-left: 8%
+
+  li:last-child
+    margin-right: 8.5%
+  a
+    text-decoration: none
+    color: white
+    &:visited
+      text-decoration: none
+      color: white
+    &:hover
+      cursor: pointer
+
+@media(min-width: 750px)
+  .nav-list
+    display: flex
+    li a
+      &:hover
+        color: lightgrey
+
+    li:first-child
+      margin: 0 auto 0 20px
+
+    .signup
+      padding: 8px 15px
+      color: black
+      background-color: white
+      &:visited
+        color: black
+      &:hover
+        color: grey
+
+    li:last-child
+      margin: 0 0 0 20px
+      margin-right: 11%

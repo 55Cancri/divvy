@@ -1,0 +1,51 @@
+// keyframes
+@mixin keyframes($animation-name)
+  @-webkit-keyframes #{$animation-name}
+    @content
+  @-moz-keyframes #{$animation-name}
+    @content
+  @-ms-keyframes #{$animation-name}
+    @content
+  @-o-keyframes #{$animation-name}
+    @content
+  @keyframes #{$animation-name}
+    @content
+
+
+// animations
+@mixin animation($str)
+  -webkit-animation: #{$str}
+  -moz-animation: #{$str}
+  -ms-animation: #{$str}
+  -o-animation: #{$str}
+
+// usage of both keyframes and animations
+// @include keyframes(slide-down)
+//   0%
+//     opacity: 1
+//   90%
+//   opacity: 0
+
+// .element
+//   width: 100px
+//   height: 100px
+//   background: black
+//   @include animation('slide-down 5s 3')
+
+
+
+
+// transistions
+@mixin transition($args...)
+  -webkit-transition: $args
+  -moz-transition: $args
+  -ms-transition: $args
+  -o-transition: $args
+  transition: $args
+
+  // usage
+  // a
+  // color: gray
+  // @include transition(color .3s ease)
+  // &:hover
+  //   color: black

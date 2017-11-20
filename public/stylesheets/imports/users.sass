@@ -1,0 +1,52 @@
+.registration-container
+  display: flex
+  flex-direction: column
+
+.registration-container h1
+  margin: 0
+  padding: 0
+  align-self: center
+
+.registration-container p
+  margin: 15px 0 5px 0
+
+.registration-container p a:visited
+  color: blue
+
+
+.registration-signup,
+.registration-login
+  display: flex
+  flex-direction: column
+
+
+.registration-signup label,
+.registration-login label
+  margin: 10px 0 5px 0
+
+.registration-signup input:not([type="submit"]),
+.registration-login input:not([type="submit"])
+  height: 30px
+  width: 100%
+  padding: 10px
+  box-sizing: border-box
+  border: 1px solid grey
+  outline: none
+  &:focus
+    border: none
+    letter-spacing: 1px
+    color: slate
+    background-color: lightgrey
+
+.registration-signup input[type="submit"],
+.registration-login input[type="submit"]
+  margin: 20px 0 0 0
+  align-self: flex-end
+  height: 35px
+  width: 27%
+  border: none
+  border-radius: 0
+  outline: none
+  letter-spacing: 1px
+  color: white
+  background-color: black
