@@ -24,6 +24,10 @@ passport.deserializeUser((id, done) => {
 // passport strategy
 // gets username and password, then proceeds to check if in db
 // if user exists, give green light to passport to login user
+
+
+
+
 passport.use(new LocalStrategy(
   (username, password, done) => {
 
@@ -36,8 +40,12 @@ passport.use(new LocalStrategy(
         const hash = user.password
         bcrypt.compare(password, hash, (err, isMatch) => {
           if (isMatch) {
-            console.log("login success.")
-            done(null, user)
+            if (!user.active) {
+              done(null, false, { message: 'Please verify your email first.'})
+            } else {
+              console.log("login success.")
+              done(null, user)
+            }
           } else {
             console.log('login failure.')
             done(null, false, {
@@ -53,6 +61,45 @@ passport.use(new LocalStrategy(
     })
   }
 ))
+
+
+
+
+
+
+
+
+
+// perfectly working original
+// passport.use(new LocalStrategy(
+//   (username, password, done) => {
+
+//     // first check if the user even exists in the db
+//     User.findOne({ username: username }, (err, user) => {
+//       if (err) {
+//         done(err)
+//         // if user does exist, compare both hashed passwords
+//       } else if (user) {
+//         const hash = user.password
+//         bcrypt.compare(password, hash, (err, isMatch) => {
+//           if (isMatch) {
+//             console.log("login success.")
+//             done(null, user)
+//           } else {
+//             console.log('login failure.')
+//             done(null, false, {
+//               message: "Invalid password."
+//             })
+//           }
+//         })
+//       } else {
+//         done(null, false, {
+//           message: "Invalid username."
+//         })
+//       }
+//     })
+//   }
+// ))
 
 
 

@@ -5,6 +5,7 @@ import User from '../models/users'
 
 import '../config/passport'
 import passport from 'passport'
+import randomstring from 'randomstring'
 import bcrypt from 'bcrypt'
 const saltRounds = 10
 
@@ -51,6 +52,10 @@ router.get('/signup', isNotAuthenticated, (req, res, next) => {
   res.render('signup', {
     url: req.originalUrl
   })
+})
+
+router.get('/verify', isNotAuthenticated, (req, res, next) => {
+  res.render('verify')
 })
 
 
@@ -106,17 +111,22 @@ router.post('/signup', (req, res, next) => {
       user.email = req.body.email
       user.password = hash
 
+      // generate secret token for mailer and store in db
+      const secretToken = randomstring.generate()
+      user.secretToken = secretToken
+      user.active = false
+
       user.save((err, result) => {
 
         // if error, do not save user
         if (err) {
           if (err.message.indexOf('duplicate key error') > -1) {
             req.flash('error', "This user already exists.")
-            res.redirect('/signup')
+            res.redirect('/users/signup')
             return
           } else {
             req.flash('error', "There was a issue completing your registration.")
-            res.redirect('/signup')
+            res.redirect('/users/signup')
           }
 
         // if no error, find the user, then log them in
@@ -130,6 +140,7 @@ router.post('/signup', (req, res, next) => {
               if (err) throw err
 
               console.log("Login success: ", newuser[0]._id)
+              req.flash('error', 'Please verify your email.')
               res.redirect('/users/dashboard')
             })
           })
@@ -139,7 +150,28 @@ router.post('/signup', (req, res, next) => {
   }
 })
 
+router.post('/verify', (req, res, next) => {
+  // pull secret token from req body and store as variable
+  const { secretToken } = req.body
 
+  // find account that matches token
+  User.findOne({ secretToken: secretToken }, (err, user) => {
+    if (err) {
+      req.flash('error', "No user found.")
+      res.redirect('/users/verify')
+    } else {
+      // if user found, set active to true and erase token
+      user.active = true
+      user.secretToken = ''
+      user.save((err, result) => {
+        if (err) throw err
+
+        req.flash('success', 'Your account has been verified.')
+        res.redirect('/users/login')
+      })
+    }
+  })
+})
 
 
 

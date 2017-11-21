@@ -18,6 +18,13 @@ let UserSchema = new Schema ({
     trim: true
   },
   accounts: [],
+  secretToken: {
+    type: String
+  },
+  active: {
+    type: Boolean,
+    default: false
+  },
   isAdmin: {
     type: Boolean,
     default: false

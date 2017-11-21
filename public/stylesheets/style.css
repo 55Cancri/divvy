@@ -485,13 +485,25 @@ body, div, ul, p {
     width: 30%;
     left: 50%;
     transform: translateX(-50%);
-    margin: 50px 0 0 0;
+    margin: 60px 0 0 0;
     padding: 15px 10px;
     text-align: center;
     border-radius: 4px;
     border: #eea5ba solid 2px;
     background-color: #f8d8e8;
-    color: #91304c; } }
+    color: #91304c; }
+  .success-msg {
+    position: absolute;
+    width: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 60px 0 0 0;
+    padding: 15px 10px;
+    text-align: center;
+    border-radius: 4px;
+    border: #afeea5 solid 2px;
+    background-color: #d9f8d8;
+    color: #309130; } }
 
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
@@ -529,6 +541,9 @@ header {
     grid-row: 2; }
   .registration-container {
     grid-column: col-start 4 / span 6;
+    grid-row: 8; }
+  .verify-container {
+    grid-column: col-start 3 / span 8;
     grid-row: 8; } }
 
 /*# sourceMappingURL=style.css.map */

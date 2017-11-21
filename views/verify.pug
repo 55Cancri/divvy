@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  div(class="verify-container")
+    h1 Verify Your Email
+    form(action="/users/verify" method="post" class="registration-login")
+
+      label(for="secretToken") Enter the secret token that was sent to your email:
+      input(type="text" name="secretToken" placeholder="paste here")
+
+      button(type="submit" class="verify") Confirm
+
+  script(src="/javascripts/users.js")
