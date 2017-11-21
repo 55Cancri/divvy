@@ -1,6 +1,18 @@
+//- thanks to the url variable passed on each route, you can customize the nav menus based on the url
+
 header
   nav
     ul(class="nav-list")
       li: a(href="/") % logo
-      li: a(href="/users/signup" class="signup") signup
-      li: a(href="/users/login") login
+
+      -if ((isAuthenticated) && (url === '/users/dashboard')) {
+        li: a(href="/settings") settings
+        li: a(href="/users/logout") logout
+
+      - } else if ((isAuthenticated) && (url === '/')) {
+        li: a(href="/users/dashboard") dashboard
+
+      - } else if (!isAuthenticated) {
+        li: a(href="/users/signup" class="signup") signup
+        li: a(href="/users/login") login
+      - }

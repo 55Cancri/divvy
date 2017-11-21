@@ -22,7 +22,6 @@ const MongoStore = connectMongo(session)
 
 import router from './routes/landing'
 import users from './routes/users'
-import profile from './routes/interface'
 
 
 
@@ -69,10 +68,13 @@ app.use(express.static(path.join(__dirname, 'public')))
 // required for flash messages to work
 app.use(session({
   secret: 'keyboard cat',
-  resave: false,
+  resave: true,
   saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection
+  }),
   cookie: {
-    // cookie expires after 3 hours and you logout
+    // cookie expires after 3 hours and logouts user
     maxAge: 180 * 60 * 1000
   }
 }))
@@ -86,15 +88,17 @@ app.use(flash())
 
 // error_messages and success_messages are now global
 // they will be used in the pug "layout" file
+// isAuthenticated is the middleware you add on routes
 app.use((req, res, next) => {
   res.locals.success_messages = req.flash('success')
   res.locals.error_messages = req.flash('error')
+  res.locals.isAuthenticated = req.user ? true : false
   next()
 })
 
 app.use('/', router)
 app.use('/users', users)
-app.use('/profile', profile)
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

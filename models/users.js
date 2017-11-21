@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 let UserSchema = new Schema ({
-  name: {
+  username: {
     type: String,
     unique: [true, "This username is taken."],
     trim: true,
@@ -17,7 +17,11 @@ let UserSchema = new Schema ({
     type: String,
     trim: true
   },
-  accounts: []
+  accounts: [],
+  isAdmin: {
+    type: Boolean,
+    default: false
+  }
 }, {
   timestamps: true,
 })

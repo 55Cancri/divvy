@@ -90,8 +90,7 @@ body, div, ul, p {
       .nav-list .signup:hover {
         color: grey; }
     .nav-list li:last-child {
-      margin: 0 0 0 20px;
-      margin-right: 11%; } }
+      margin: 0 20px 0 20px; } }
 
 @-webkit-keyframes slide-down {
   0% {
