@@ -1,3 +1,6 @@
+// index for "components" of webapp (not react yet ;))
+// also handles "component" positioning
+
 @import "./imports/reset"
 @import "./imports/fonts"
 @import "./imports/header"
@@ -5,6 +8,7 @@
 @import "./imports/animations"
 @import "./imports/input"
 @import "./imports/accounts-list"
+@import "./imports/sidebar"
 @import "./imports/users"
 @import "./imports/pop-messages"
 
@@ -15,6 +19,8 @@ body
 
 .wrapper
   display: grid
+  position: relative
+  left: 0
   grid-template-columns: repeat(12, [col-start] 1fr)
   grid-gap: 20px
   max-width: 1024px
@@ -30,6 +36,9 @@ header
 // mobile
 .wrapper > *
   grid-column: col-start / span 12
+
+.landing-container
+  grid-column: col-start 2 / span 10
 
 .input-container
   grid-column: col-start 2 / span 10

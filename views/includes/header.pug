@@ -1,18 +1,31 @@
 //- thanks to the url variable passed on each route, you can customize the nav menus based on the url
 
+
+
 header
   nav
-    ul(class="nav-list")
-      li: a(href="/") % logo
+    - if (url === '/') {
+      ul(class="landing-list")
+        li(class="logo-link"): a(href="/") logo
+        li(class="signup-link"): a(href="/users/signup") signup
+        li(class="login-link"): a(href="/users/login") login
 
-      -if ((isAuthenticated) && (url === '/users/dashboard')) {
-        li: a(href="/settings") settings
-        li: a(href="/users/logout") logout
+    - } else if (url === '/users/dashboard') {
+      ul(class="nav-list")
+        li(class="sidemenu-link"): label(for="sidebar-toggler"): i(class="fa fa-bars")
+        li(class="logo-link"): a(href="/") logo
 
-      - } else if ((isAuthenticated) && (url === '/')) {
+        li(class="drop-menu"): a(href="#") #{user.username}
+          div(class="drop-triangle")
+          ul(class="sub-menu")
+            li: a(href="/users/accout") account
+            li: a(href="/users/logout") logout
+
+        li: a(href="#"): i(class="fa fa-bell")
+        li(class="settings-link"): a(href="/settings"): i(class="fa fa-cog")
+
+    - } else if (url === '/users/settings') {
+      ul(class="nav-list")
+        li: a(href="#"): i(class="fa fa-bell")
         li: a(href="/users/dashboard") dashboard
-
-      - } else if (!isAuthenticated) {
-        li: a(href="/users/signup" class="signup") signup
-        li: a(href="/users/login") login
-      - }
+    - }

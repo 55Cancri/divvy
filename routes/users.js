@@ -5,6 +5,7 @@ import User from '../models/users'
 
 import '../config/passport'
 import passport from 'passport'
+import transport from '../misc/mailer'
 import randomstring from 'randomstring'
 import bcrypt from 'bcrypt'
 const saltRounds = 10
@@ -47,23 +48,21 @@ router.get('/login', isNotAuthenticated, (req, res, next) => {
   })
 })
 
-
 router.get('/signup', isNotAuthenticated, (req, res, next) => {
   res.render('signup', {
     url: req.originalUrl
   })
 })
 
-router.get('/verify', isNotAuthenticated, (req, res, next) => {
+router.get('/verify', (req, res, next) => {
   res.render('verify')
 })
-
 
 router.get('/logout', isAuthenticated, (req, res, next) => {
   req.logout()
   req.session.destroy(() => {
     res.clearCookie('coonect.sid')
-    res.redirect('/')
+    res.redirect('/users/login')
   })
 })
 
@@ -111,11 +110,53 @@ router.post('/signup', (req, res, next) => {
       user.email = req.body.email
       user.password = hash
 
-      // generate secret token for mailer and store in db
+      // generate secret token for mailer and store in user's db
+      // also set account status to inactive
       const secretToken = randomstring.generate()
       user.secretToken = secretToken
       user.active = false
 
+      // 1. what will be displayed in email
+      const output = `Hi there,
+      <br/><br/>
+      Thank you for registering!
+      <br/><br/>
+      Please verify your email by pasting the following token in the link provided below:
+      <br/><br/>
+      Token: <b>${secretToken}</b>
+      <br/><br/>
+      On the following page:
+      <a href="http://localhost:4040/users/verify">http://localhost:4040/users/verify</a>
+      <br/><br/>
+      Have a nice day!`
+
+      // 2. sendMail configuration
+      const mailOptions = {
+        // from is value of "Default SMTP Login" under "Domain Information"
+        from: 'Eric <postmaster@malin1.com>',
+        // send email to the user who just signed up based on form info
+        to: user.email,
+        subject: 'Please verify your account',
+        html: output
+      }
+
+      // 3. send email with mailOptions defined above
+      // info is returned object with accessible properties
+      transport.sendMail(mailOptions, (err, info) => {
+        if (err) {
+          return console.log(err)
+
+        } else {
+          console.log('Message sent: %s', info.messageId)
+          console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
+        }
+      })
+
+      // finally, after:
+      // 1. form validation with joi,
+      // 2. password hashing with bcrypt,
+      // 3. and sending email with nodemailer and mailgun,
+      // save user to database
       user.save((err, result) => {
 
         // if error, do not save user
@@ -140,7 +181,7 @@ router.post('/signup', (req, res, next) => {
               if (err) throw err
 
               console.log("Login success: ", newuser[0]._id)
-              req.flash('error', 'Please verify your email.')
+              req.flash('error', 'Please check your email in order to verify this account. You won\'t be able to login again until you do.')
               res.redirect('/users/dashboard')
             })
           })
@@ -154,7 +195,7 @@ router.post('/verify', (req, res, next) => {
   // pull secret token from req body and store as variable
   const { secretToken } = req.body
 
-  // find account that matches token
+  // find account that has the token entered by the user
   User.findOne({ secretToken: secretToken }, (err, user) => {
     if (err) {
       req.flash('error', "No user found.")
@@ -167,7 +208,7 @@ router.post('/verify', (req, res, next) => {
         if (err) throw err
 
         req.flash('success', 'Your account has been verified.')
-        res.redirect('/users/login')
+        res.redirect('/users/dashboard')
       })
     }
   })
@@ -179,7 +220,7 @@ router.get('/dashboard', isAuthenticated, (req, res, next) => {
   res.render('dashboard', {
     url: req.originalUrl,
     title: 'Centage',
-    username: req.user.username
+    user: req.user
   })
 })
 

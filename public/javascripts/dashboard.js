@@ -5,6 +5,7 @@ window.onload = function() {
   let accountEditItems = [].slice.call(document.querySelectorAll('.edit'))
 
 
+
   accountListItems.forEach(function(item, index) {
     item.addEventListener('mouseover', function() {
       item.classList.remove('turn-white')

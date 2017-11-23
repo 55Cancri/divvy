@@ -1,0 +1,30 @@
+@import './universal-mixins'
+
+// input checkbox in sidebar.pug
+#sidebar-toggler
+  display: none
+  &:checked + .sidebar
+    left: 0
+    @include transition(all .6s ease-in-out)
+
+  &:checked + .sidebar + .wrapper
+    left: 260px
+    @include transition(all .6s ease-in-out)
+
+// list item label in header.pug, first child of .nav-list class
+.sidebar
+  position: fixed
+  left: -260px
+  height: 100vh
+  width: 200px
+  padding: 30px
+  background-color: #424949
+  @include transition(all .6s ease-in-out)
+  z-index: 1
+  li
+    margin: 0 0 10px 0
+    list-style: none
+    color: white
+
+.wrapper
+  @include transition(all .6s ease-in-out)

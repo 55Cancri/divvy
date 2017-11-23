@@ -1,3 +1,7 @@
+// here the animations are defined on the classes and appended directly to the element
+
+// for custom animations, go to css class and @include animation(properties) under it instead
+
 @import './animations'
 
 .turn-grey
@@ -11,6 +15,7 @@
 
 .fade-out
   @include animation('slide-down .5s forwards')
+
 
 
 .hidden

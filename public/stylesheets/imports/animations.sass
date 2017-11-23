@@ -1,4 +1,14 @@
+// to use, add to sass file (accents) with parameters like this:
+
+// .fade-out
+//   @include animation('slide-down .5s forwards')
+
+// then add that class to target element
+
+
 @import './universal-mixins'
+
+
 
 @include keyframes(slide-down)
   0%
@@ -14,18 +24,26 @@
 
 
 
-
 @include keyframes(turn-grey)
   0%
     background-color: white
   100%
     background-color: lightgrey
 
-
-
-
 @include keyframes(turn-white)
   0%
     background-color: lightgrey
   100%
     background-color: white
+
+
+
+@include keyframes(flappers)
+  0%
+    opacity: 0
+    transform: rotateX(-90deg)
+  60%
+    transform: rotateX(50deg)
+  100%
+    opacity: 1
+    transform: rotateX(0deg)

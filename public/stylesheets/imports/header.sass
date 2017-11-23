@@ -1,43 +1,102 @@
+@import './animations'
 
-.nav-list
+// universal navigation settings
+.landing-list, .nav-list
   display: none
   align-items: center
   list-style-type: none
   margin: 0 0 50px 0        // change for mobile
   height: 50px
-  background-color: black
-  li:first-child
-    margin-left: 8%
 
-  li:last-child
-    margin-right: 8.5%
-  a
+  li
+    margin: 0 0 0 15px
+
+  li a
     text-decoration: none
-    color: white
-    &:visited
-      text-decoration: none
-      color: white
     &:hover
       cursor: pointer
 
-@media(min-width: 750px)
-  .nav-list
-    display: flex
-    li a
-      &:hover
-        color: lightgrey
+  .sidemenu-link
+    margin: 0 0 0 20px
+    color: white
 
-    li:first-child
-      margin: 0 auto 0 20px
+  .logo-link
+    margin: 0 auto 0 20px
 
-    .signup
-      padding: 8px 15px
+
+// navigation settings for landing page
+.landing-list
+  background-color: white
+  li a
+    color: black
+    &:visited
       color: black
-      background-color: white
-      &:visited
-        color: black
-      &:hover
-        color: grey
+    &:hover
+      color: gray
 
-    li:last-child
-      margin: 0 20px 0 20px
+  .signup-link
+    margin: 0 0 0 20px
+
+  .login-link
+    margin: 0 20px 0 20px
+
+
+// navigation settings for dashboard page
+.nav-list > li a
+  color: white
+  &:hover
+    color: lightgrey
+
+.nav-list
+  background-color: black
+
+  .settings-link
+    margin: 0 20px 0 20px
+
+
+  .drop-triangle
+    display: inline-block
+    width: 0
+    height: 0
+    margin: 0 0 2px 5px
+    border-left: 4px solid transparent
+    border-right: 4px solid transparent
+    border-top: 4px solid #fff
+
+
+  // load hidden
+  .sub-menu
+    display: none
+    position: absolute
+    list-style-type: none
+
+  .sub-menu li
+    &:first-of-type
+      margin: 14px 0 0 0
+
+  .sub-menu li
+    margin: 0 0 0 0
+    padding: 8px 30px 15px 15px
+    opacity: 0
+    background-color: grey
+    transform-origin: top center
+    @for $i from 1 through 2
+      &:nth-of-type(#{$i})
+        animation:
+          name: flappers
+          duration: 300ms
+          delay: (300ms * $i) - 300
+          timing-function: ease-in-out
+          fill-mode: forwards
+
+  .sub-menu li a
+    color: white
+
+  // toggle this class on .sub-menu ul on username click
+  .show
+    display: block
+
+
+@media(min-width: 750px)
+  .landing-list, .nav-list
+    display: flex
