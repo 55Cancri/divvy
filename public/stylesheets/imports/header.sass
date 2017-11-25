@@ -96,6 +96,42 @@
   .show
     display: block
 
+  .navbar-toggle
+    display: block
+    border: none
+    height: 10px
+    outline: none
+    background-color: transparent
+    color: white
+    .icon-bar
+      position: absolute
+      height: 2px
+      width: 17px
+      top: 20px
+      left: 18px
+      border-radius: 4px
+      background-color: white
+      transition: all .2s
+    .top-bar
+      transform: translateY(4px) rotate(45deg)
+      tarnsform-origin: 10% 10%
+      color: red
+    .middle-bar
+      opacity: 0
+      margin-top: 5px
+    .bottom-bar
+      transform: translateX(2.6px) translateY(-1.6px) rotate(-45deg)
+      transform-origin: 10% 90%
+      margin-top: 10px
+
+  .navbar-toggle.collapsed
+    .top-bar
+      transform: rotate(0)
+    .middle-bar
+      opacity: 1
+    .bottom-bar
+      transform: rotate(0)
+
 
 @media(min-width: 750px)
   .landing-list, .nav-list

@@ -1,9 +1,55 @@
+//- user "user" variable to access user, not local_data
+
+-
+  function addZeroes(num) {
+      let value = Number(num)
+      let res = num.split(".")
+      if(num.indexOf('.') === -1) {
+          value = value.toFixed(2)
+          num = value.toString()
+      } else if (res[1].length < 3) {
+          value = value.toFixed(2)
+          num = value.toString()
+      }
+  return num
+  }
+
+  var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
+
+
+  Date.prototype.getFormattedTime = function () {
+    let hours = this.getHours() == 0 ? "12" : this.getHours() > 12 ? this.getHours() - 12 : this.getHours()
+    let minutes = (this.getMinutes() < 10 ? "0" : "") + this.getMinutes()
+    let ampm = this.getHours() < 12 ? "AM" : "PM"
+    let formattedTime = hours + ":" + minutes + " " + ampm
+    return formattedTime
+  }
+
+  let infusions = user.infusions.reverse()
+
 input(type="checkbox" id="sidebar-toggler")
 
 div(class="sidebar")
-  ul
-    li home
-    li projects
-    li clients
-    li blog
-    li contact
+  h2 Latest Infusions
+  ul(class="latest-injections-list")
+    each val in infusions
+
+      - let amount = addZeroes(val.amount)
+      - let month = monthNames[val.dateAdded.getMonth()]
+      - let day = val.dateAdded.getDay()
+      - let time = val.dateAdded.getFormattedTime()
+
+      li= `+ $ ${amount} on
+       ${month} ${day}, at ${time}`
+    else
+      li There are no values
+
+
+//- div(class="sidebar")
+//-   h2 Latest Infusions
+//-   - var infusions = user.infusions.reverse()
+//-   ul(class="latest-injections-list")
+//-     each val in infusions
+//-       li= "+ $" + addZeroes(val.amount) + " on " + val.dateAdded.getHours() + ":" + val.dateAdded.getMinutes()
+//-     else
+//-       li There are no values

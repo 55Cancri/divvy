@@ -22,6 +22,7 @@ const MongoStore = connectMongo(session)
 
 import router from './routes/landing'
 import users from './routes/users'
+import funds from './routes/funds'
 
 
 
@@ -98,6 +99,7 @@ app.use((req, res, next) => {
 
 app.use('/', router)
 app.use('/users', users)
+app.use('/funds', funds)
 
 
 // catch 404 and forward to error handler

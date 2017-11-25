@@ -17,6 +17,10 @@ let UserSchema = new Schema ({
     type: String,
     trim: true
   },
+  infusions: {
+    type: Array,
+    timestamps: true
+  },
   accounts: [],
   secretToken: {
     type: String

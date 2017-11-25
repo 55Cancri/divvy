@@ -53,6 +53,9 @@ body, div, ul, p {
 .registration-signup button[type="submit"] {
   font: normal 1em din; }
 
+.sidebar h2 {
+  font: normal 1.2em din; }
+
 @media (min-width: 750px) {
   .input-divvy button {
     font: normal 1.2em din; } }
@@ -303,6 +306,39 @@ body, div, ul, p {
     color: white; }
   .nav-list .show {
     display: block; }
+  .nav-list .navbar-toggle {
+    display: block;
+    border: none;
+    height: 10px;
+    outline: none;
+    background-color: transparent;
+    color: white; }
+    .nav-list .navbar-toggle .icon-bar {
+      position: absolute;
+      height: 2px;
+      width: 17px;
+      top: 20px;
+      left: 18px;
+      border-radius: 4px;
+      background-color: white;
+      transition: all .2s; }
+    .nav-list .navbar-toggle .top-bar {
+      transform: translateY(4px) rotate(45deg);
+      tarnsform-origin: 10% 10%;
+      color: red; }
+    .nav-list .navbar-toggle .middle-bar {
+      opacity: 0;
+      margin-top: 5px; }
+    .nav-list .navbar-toggle .bottom-bar {
+      transform: translateX(2.6px) translateY(-1.6px) rotate(-45deg);
+      transform-origin: 10% 90%;
+      margin-top: 10px; }
+  .nav-list .navbar-toggle.collapsed .top-bar {
+    transform: rotate(0); }
+  .nav-list .navbar-toggle.collapsed .middle-bar {
+    opacity: 1; }
+  .nav-list .navbar-toggle.collapsed .bottom-bar {
+    transform: rotate(0); }
 
 @media (min-width: 750px) {
   .landing-list, .nav-list {
@@ -750,20 +786,22 @@ body, div, ul, p {
 
 #sidebar-toggler {
   display: none; }
-  #sidebar-toggler:checked + .sidebar {
-    left: 0;
-    -webkit-transition: all 0.6s ease-in-out;
-    -moz-transition: all 0.6s ease-in-out;
-    -ms-transition: all 0.6s ease-in-out;
-    -o-transition: all 0.6s ease-in-out;
-    transition: all 0.6s ease-in-out; }
-  #sidebar-toggler:checked + .sidebar + .wrapper {
-    left: 260px;
-    -webkit-transition: all 0.6s ease-in-out;
-    -moz-transition: all 0.6s ease-in-out;
-    -ms-transition: all 0.6s ease-in-out;
-    -o-transition: all 0.6s ease-in-out;
-    transition: all 0.6s ease-in-out; }
+
+.slide-out + .sidebar {
+  left: 0;
+  -webkit-transition: all 0.6s ease-in-out;
+  -moz-transition: all 0.6s ease-in-out;
+  -ms-transition: all 0.6s ease-in-out;
+  -o-transition: all 0.6s ease-in-out;
+  transition: all 0.6s ease-in-out; }
+
+.slide-out + .sidebar + .wrapper {
+  left: 260px;
+  -webkit-transition: all 0.6s ease-in-out;
+  -moz-transition: all 0.6s ease-in-out;
+  -ms-transition: all 0.6s ease-in-out;
+  -o-transition: all 0.6s ease-in-out;
+  transition: all 0.6s ease-in-out; }
 
 .sidebar {
   position: fixed;
@@ -771,7 +809,7 @@ body, div, ul, p {
   height: 100vh;
   width: 200px;
   padding: 30px;
-  background-color: #424949;
+  background-image: radial-gradient(70% 60%, #282627, #141314);
   -webkit-transition: all 0.6s ease-in-out;
   -moz-transition: all 0.6s ease-in-out;
   -ms-transition: all 0.6s ease-in-out;
@@ -789,6 +827,24 @@ body, div, ul, p {
   -ms-transition: all 0.6s ease-in-out;
   -o-transition: all 0.6s ease-in-out;
   transition: all 0.6s ease-in-out; }
+
+.sidebar h2 {
+  margin: 88px 0 0 0;
+  color: white; }
+
+.latest-injections-list {
+  margin: 30px 0 0 0; }
+
+.settings-container > h1 {
+  margin: 0 0 10px 0;
+  padding: 0; }
+
+.settings-container > p:first-of-type {
+  margin: 0 0 30px 0;
+  padding: 0; }
+
+.settings-container label {
+  margin: 0 0 10px 0; }
 
 .registration-container {
   display: flex;
@@ -911,6 +967,9 @@ header {
     grid-row: 8; }
   .verify-container {
     grid-column: col-start 3 / span 8;
-    grid-row: 8; } }
+    grid-row: 8; }
+  .settings-container {
+    grid-column: col-start 4 / span 6;
+    grid-row: 2; } }
 
 /*# sourceMappingURL=style.css.map */

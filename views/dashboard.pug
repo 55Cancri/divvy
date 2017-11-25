@@ -1,13 +1,14 @@
+//- anytime you need to pass user object to client-side js, use the JSON.stringify script tag at the bottom
 extends layout
 
 block content
   include ./includes/header
   include ./includes/input
   include ./includes/accounts-list
-  script(src="/javascripts/dashboard.js")
-  script(src="/javascripts/main.js")
 
 block error-msg
   - if (error) {
     include ./error.pug
   - }
+
+  script(src="/javascripts/dashboard.js")

@@ -3,13 +3,14 @@
 // input checkbox in sidebar.pug
 #sidebar-toggler
   display: none
-  &:checked + .sidebar
-    left: 0
-    @include transition(all .6s ease-in-out)
 
-  &:checked + .sidebar + .wrapper
-    left: 260px
-    @include transition(all .6s ease-in-out)
+.slide-out + .sidebar
+  left: 0
+  @include transition(all .6s ease-in-out)
+
+.slide-out + .sidebar + .wrapper
+  left: 260px
+  @include transition(all .6s ease-in-out)
 
 // list item label in header.pug, first child of .nav-list class
 .sidebar
@@ -18,7 +19,7 @@
   height: 100vh
   width: 200px
   padding: 30px
-  background-color: #424949
+  background-image: radial-gradient(70% 60%, #282627, #141314)
   @include transition(all .6s ease-in-out)
   z-index: 1
   li
@@ -28,3 +29,14 @@
 
 .wrapper
   @include transition(all .6s ease-in-out)
+
+
+
+
+.sidebar h2
+  margin: 88px 0 0 0
+  color: white
+
+.latest-injections-list
+  &:first-child
+  margin: 30px 0 0 0

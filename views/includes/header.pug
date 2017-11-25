@@ -10,10 +10,13 @@ header
         li(class="signup-link"): a(href="/users/signup") signup
         li(class="login-link"): a(href="/users/login") login
 
-    - } else if (url === '/users/dashboard') {
+    - } else if ((url === '/users/dashboard') || (url === '/users/settings')) {
       ul(class="nav-list")
-        li(class="sidemenu-link"): label(for="sidebar-toggler"): i(class="fa fa-bars")
-        li(class="logo-link"): a(href="/") logo
+        li(class="sidemenu-link"): label(for="sidebar-toggler"): button(type="button" class="navbar-toggle collapsed" aria-controls="navbar")
+            span(class="icon-bar top-bar")
+            span(class="icon-bar middle-bar")
+            span(class="icon-bar bottom-bar")
+        li(class="logo-link"): a(href="/users/dashboard") logo
 
         li(class="drop-menu"): a(href="#") #{user.username}
           div(class="drop-triangle")
@@ -22,10 +25,5 @@ header
             li: a(href="/users/logout") logout
 
         li: a(href="#"): i(class="fa fa-bell")
-        li(class="settings-link"): a(href="/settings"): i(class="fa fa-cog")
-
-    - } else if (url === '/users/settings') {
-      ul(class="nav-list")
-        li: a(href="#"): i(class="fa fa-bell")
-        li: a(href="/users/dashboard") dashboard
+        li(class="settings-link"): a(href="/users/settings"): i(class="fa fa-cog")
     - }

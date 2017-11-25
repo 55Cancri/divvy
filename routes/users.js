@@ -9,6 +9,7 @@ import transport from '../misc/mailer'
 import randomstring from 'randomstring'
 import bcrypt from 'bcrypt'
 const saltRounds = 10
+import port from '../bin/www'
 
 
 // validation schema
@@ -40,7 +41,29 @@ const isNotAuthenticated = (req, res, next) => {
   }
 }
 
+const isVerified = (req, res, next) => {
+  if(req.user.active) {
+    return next()
+  } else {
+    req.flash('error', 'You must verify your account before you can make changes.')
+    res.redirect('/users/dashboard')
+  }
+}
 
+const isAdmin = (req, res, next) => {
+  if(req.user.active) {
+    return next()
+  } else {
+    req.flash('error', 'You do not have sufficient priviledges.')
+  }
+}
+
+// router.get('/info', (req, res, next) => {
+//   console.log("Requested Data: ", req.user.session)
+//   res.json({
+//     user: req.user
+//   })
+// })
 
 router.get('/login', isNotAuthenticated, (req, res, next) => {
   res.render('login', {
@@ -126,7 +149,7 @@ router.post('/signup', (req, res, next) => {
       Token: <b>${secretToken}</b>
       <br/><br/>
       On the following page:
-      <a href="http://localhost:4040/users/verify">http://localhost:4040/users/verify</a>
+      <a href="http://localhost:${port}/users/verify">http://localhost:${port}/users/verify</a>
       <br/><br/>
       Have a nice day!`
 
@@ -223,6 +246,43 @@ router.get('/dashboard', isAuthenticated, (req, res, next) => {
     user: req.user
   })
 })
+
+router.get('/settings', isVerified, (req, res, next) => {
+  res.render('settings', {
+    url: req.originalUrl,
+    user: req.user
+  })
+})
+
+router.post('/settings', (req, res, next) => {
+  if (req.body.username.length > 0) {
+    User.findByIdAndUpdate(
+      { _id: req.user.id },
+      {$set: { username: req.body.username}}, (err, result) => {
+        console.log("old username: ", req.user.username)
+        console.log("new username: ", req.body.username)
+        req.flash('success', 'You changes have been saved.')
+        res.redirect('/users/settings')
+      })
+  } else if (req.body.email.length > 0) {
+    User.findByIdAndUpdate(
+      { _id: req.user.id },
+      {$set: { username: req.body.email}}, (err, result) => {
+        console.log("old username: ", req.user.email)
+        console.log("new username: ", req.body.email)
+        req.flash('success', 'You changes have been saved.')
+        res.redirect('/users/settings')
+      })
+  } else {
+    console.log("No changes were made.")
+    res.redirect('/users/settings')
+  }
+})
+
+
+
+
+
 
 
 export default router

@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  include ./includes/header
+  div(class="settings-container")
+    h1 Settings
+    p Update your settings
+    form(action="/users/settings" method="post" class="registration-login")
+
+      - var name = user.username
+      - var email = user.email
+
+      label(for="username") Update Name
+      input(type="username" name="username" placeholder=`${name}`)
+
+      label(for="email") Update Email
+      input(type="email" name="email" placeholder=`${email}`)
+
+      label(for="password") Old Password
+      input(type="password" name="password" placeholder!="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;")
+
+      label(for="new-password") New Password
+      input(type="password" name="new-password")
+
+      button(type="submit") submit
+
+    p(class="switch") Don't have an account?&nbsp;
+      a(href="/users/signup") Signup

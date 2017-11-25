@@ -1,7 +1,7 @@
 div(class="input-container")
-  form(action="#" method="post" class="input-divvy")
+  form(class="input-divvy")
     label(for="divvy") Enter amount
     div(class="merge-input")
       p(class="dollar-sign") $
-      input(type="text" name="divvy" autocomplete="off")
-    button(type="submit") dispense
+      input(type="text" name="divvy" class="injection-value" autocomplete="off")
+    button(type="submit" class="dispenser") dispense
