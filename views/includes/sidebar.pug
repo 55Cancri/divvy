@@ -31,16 +31,20 @@ input(type="checkbox" id="sidebar-toggler")
 
 div(class="sidebar")
   h2 Latest Infusions
-  ul(class="latest-injections-list")
+  ul(class="infusions")
     each val in infusions
 
       - let amount = addZeroes(val.amount)
-      - let month = monthNames[val.dateAdded.getMonth()]
       - let day = val.dateAdded.getDay()
+      - let month = monthNames[val.dateAdded.getMonth()]
+      - let year = val.dateAdded.getFullYear()
       - let time = val.dateAdded.getFormattedTime()
+      - let newline =`\n`
 
-      li= `+ $ ${amount} on
-       ${month} ${day}, at ${time}`
+      li
+        p(class="money")= `+ $${amount}`
+        p(class="date")= `on ${newline} ${month} ${day}, ${year}`
+        p(class="time")= `at ${time}`
     else
       li There are no values
 
