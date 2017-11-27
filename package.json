@@ -1,10 +1,13 @@
+
+
 {
   "name": "quick-build",
   "version": "0.0.0",
   "private": true,
+  "// comment": "npm run <script name> to run scripts",
   "scripts": {
     "start": "nodemon ./bin/www --exec babel-node",
-    "node": "babel-node ./bin/www"
+    "reg": "babel-node ./bin/www"
   },
   "dependencies": {
     "bcrypt": "^1.0.3",

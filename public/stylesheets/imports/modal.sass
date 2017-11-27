@@ -10,55 +10,86 @@
   // overflow: auto        // add scrollbars if needed
   z-index: 100
   background-color: rgba(0, 0, 0, .5)
-
   .modal-content
     display: flex
     flex-direction: column
     margin: 10% auto
     width: 70%
+    max-width: 700px
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, .2), 0 7px 20px 0 rgba(0, 0, 0, .17)
     background-color: #f4f4f4
     @include animation('bounce-in .3s forwards')
 
-  .modal-content .top
+
+
+  .top
     display: flex
     flex-direction: column
     z-index: 6
     box-shadow: 0 25px 15px -15px rgba(0, 0, 0, .2);
+    header
+      display: flex
+      justify-content: space-between
+      margin: 20px 20px 0 20px
+      .total-points
+        letter-spacing: .5px
+        color: #3399FF
+    form
+      display: flex
+      flex-direction: column
 
-  .modal-content .bottom
+    .percentage-div
+      display: flex
+      align-self: center
+      color: $mine-shaft
+      .enter-account-percentage
+        max-width: 70px
+        outline: none
+        border: none
+        background: transparent
+        text-align: center
+      .percent-symbol
+        align-self: center
+      .minus, .add
+        border: none
+        outline: none
+        background: none
+        font-size: 3em
+        // border: 1px solid red
+        color: $mine-shaft
+        &:active
+          color: $dove-gray
+
+    .submit-div
+      display: flex
+      flex-direction: column
+      .enter-account-name
+        align-self: center
+        margin: 10px auto
+        height: 40px
+        width: 40%
+        outline: none
+        border: none
+        background: transparent
+        appearance: none
+        text-align: center
+        color: $mine-shaft
+      .submit-new-account
+        align-self: flex-end
+        margin: 0 20px 20px 0
+        padding: 8px 12px
+        border: none
+        border-radius: 0
+        color: white
+        background-color: black
+
+
+  .bottom
     display: flex
     flex-direction: column
     margin: 25px 0 0 0
     z-index: 5
 
-
-
-  .modal-content header
-    display: flex
-    justify-content: space-between
-    margin: 20px 20px 0 20px
-
-  .modal-content header .total-points
-    letter-spacing: .5px
-    color: #3399FF
-
-
-
-  .modal-percentage
-    display: flex
-    align-self: center
-    color: $mine-shaft
-
-  .modal-percentage .minus, .modal-percentage .add
-    border: none
-    outline: none
-    background: none
-    font-size: 3em
-    border: 1px solid red
-    color: $mine-shaft
-    &:active
-      color: $dove-gray
 
   .list-minus, .list-add
     border: none
@@ -73,22 +104,7 @@
     &:active
       color: $dove-gray
 
-  .modal-content .account-name
-    text-align: center
-    color: $mine-shaft
 
-  .modal-content .submit
-    display: flex
-    flex-direction: column
-
-  .account-name + .modal-done
-    align-self: flex-end
-    margin: 0 20px 20px 0
-    padding: 8px 12px
-    border: none
-    border-radius: 0
-    color: white
-    background-color: black
 
 
   .bottom .modal-account-list
@@ -126,3 +142,11 @@
     &:hover
       cursor: pointer
       color: $dove-gray
+
+
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+  -webkit-appearance: none
+  margin: 0

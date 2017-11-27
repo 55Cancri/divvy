@@ -26,8 +26,31 @@ router.post('/infusions', (req, res, next) => {
     res.json(result)
   })
   .catch((err) => {
-    console.log(err)
+    console.log("New infusion error: ", err)
   })
 })
+
+router.post('/new', (req, res, next) => {
+  User.findByIdAndUpdate(
+    { _id: req.body.user._id },
+    { $push: { accounts: {
+      accountName: req.body.accountName,
+      percent: req.body.accountPercent,
+      dateCreated: new Date()
+    }
+  }},
+   { new: true })
+  .exec()
+  .then((result) => {
+    console.log("Db results: ", result)
+    res.json(result.accounts)
+  })
+  .catch((err) => {
+    console.log("Account creation error: ", err)
+  })
+})
+
+
+
 
 export default router

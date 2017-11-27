@@ -5,14 +5,19 @@ div(class="modal")
         p total points:
           span(class="total-points")  100
         div(class="fa fa-close modal-close")
-      div(class="modal-percentage")
-        button(class="minus") -
-        p(class="modal-percentage-number") 25
-          span %
-        button(class="add") +
-      div(class="submit")
-        input(class="account-name" placeholder="Account name")
-        button(class="modal-done") done
+      form(method="post" class="newAccount")
+        div(class="percentage-div")
+          button(class="minus") -
+
+          input(class="enter-account-percentage" name="account_percent" maxlength="3" size="2" min="1" max="99" value="14" type="number" oninput="this.setCustomValidity('Percent must not be empty.')" required)
+
+          span(class="percent-symbol") %
+
+          button(class="add") +
+
+        div(class="submit-div")
+          input(class="enter-account-name" name="account_name" type="text" placeholder="Account name" required)
+          input(class="submit-new-account" type="submit" value="done")
     div(class="bottom")
       ul(class="modal-account-list")
         li

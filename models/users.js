@@ -3,14 +3,16 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 let AccountSchema = new Schema ({
-  name: {
+  accountName: {
     type: String,
-    trim: true
+    trim: true,
+    required: true
   },
   percent: {
     type: Number,
     min: 1,
-    max: 100
+    max: 100,
+    required: true
   },
   isGoal: {
     type: Boolean,

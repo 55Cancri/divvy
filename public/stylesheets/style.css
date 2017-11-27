@@ -11,9 +11,6 @@ body, div, ul, p {
 .nav-list {
   font: normal 1.2em din; }
 
-.nav-list .logo-link {
-  font: normal 1.2em din; }
-
 .accounts-list li {
   font: normal 1.7em din; }
 
@@ -65,7 +62,16 @@ body, div, ul, p {
 .modal-content header .total-points {
   font: bold 1.4rem din; }
 
-.account-name + .modal-done {
+.top .enter-account-name {
+  font: normal 1.5rem din; }
+
+.top .enter-account-percentage {
+  font: normal 4rem din; }
+
+.top .percent-symbol {
+  font: normal 3rem din; }
+
+.top .submit-account {
   font: normal 1rem din; }
 
 .sidebar {
@@ -1431,42 +1437,75 @@ body, div, ul, p {
     flex-direction: column;
     margin: 10% auto;
     width: 70%;
+    max-width: 700px;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
     background-color: #f4f4f4;
     -webkit-animation: bounce-in .3s forwards;
     -moz-animation: bounce-in .3s forwards;
     -ms-animation: bounce-in .3s forwards;
     -o-animation: bounce-in .3s forwards; }
-  .modal .modal-content .top {
+  .modal .top {
     display: flex;
     flex-direction: column;
     z-index: 6;
     box-shadow: 0 25px 15px -15px rgba(0, 0, 0, 0.2); }
-  .modal .modal-content .bottom {
+    .modal .top header {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 20px 0 20px; }
+      .modal .top header .total-points {
+        letter-spacing: .5px;
+        color: #3399FF; }
+    .modal .top form {
+      display: flex;
+      flex-direction: column; }
+    .modal .top .percentage-div {
+      display: flex;
+      align-self: center;
+      color: #383838; }
+      .modal .top .percentage-div .enter-account-percentage {
+        max-width: 70px;
+        outline: none;
+        border: none;
+        background: transparent;
+        text-align: center; }
+      .modal .top .percentage-div .percent-symbol {
+        align-self: center; }
+      .modal .top .percentage-div .minus, .modal .top .percentage-div .add {
+        border: none;
+        outline: none;
+        background: none;
+        font-size: 3em;
+        color: #383838; }
+        .modal .top .percentage-div .minus:active, .modal .top .percentage-div .add:active {
+          color: #707070; }
+    .modal .top .submit-div {
+      display: flex;
+      flex-direction: column; }
+      .modal .top .submit-div .enter-account-name {
+        align-self: center;
+        margin: 10px auto;
+        height: 40px;
+        width: 40%;
+        outline: none;
+        border: none;
+        background: transparent;
+        appearance: none;
+        text-align: center;
+        color: #383838; }
+      .modal .top .submit-div .submit-new-account {
+        align-self: flex-end;
+        margin: 0 20px 20px 0;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 0;
+        color: white;
+        background-color: black; }
+  .modal .bottom {
     display: flex;
     flex-direction: column;
     margin: 25px 0 0 0;
     z-index: 5; }
-  .modal .modal-content header {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 20px 0 20px; }
-  .modal .modal-content header .total-points {
-    letter-spacing: .5px;
-    color: #3399FF; }
-  .modal .modal-percentage {
-    display: flex;
-    align-self: center;
-    color: #383838; }
-  .modal .modal-percentage .minus, .modal .modal-percentage .add {
-    border: none;
-    outline: none;
-    background: none;
-    font-size: 3em;
-    border: 1px solid red;
-    color: #383838; }
-    .modal .modal-percentage .minus:active, .modal .modal-percentage .add:active {
-      color: #707070; }
   .modal .list-minus, .modal .list-add {
     border: none;
     outline: none;
@@ -1479,20 +1518,6 @@ body, div, ul, p {
     color: #383838; }
     .modal .list-minus:active, .modal .list-add:active {
       color: #707070; }
-  .modal .modal-content .account-name {
-    text-align: center;
-    color: #383838; }
-  .modal .modal-content .submit {
-    display: flex;
-    flex-direction: column; }
-  .modal .account-name + .modal-done {
-    align-self: flex-end;
-    margin: 0 20px 20px 0;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 0;
-    color: white;
-    background-color: black; }
   .modal .bottom .modal-account-list {
     display: flex;
     flex-flow: column wrap;
@@ -1520,6 +1545,11 @@ body, div, ul, p {
     .modal .modal-close:hover {
       cursor: pointer;
       color: #707070; }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
 
 #sidebar-toggler {
   display: none; }
