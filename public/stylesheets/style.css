@@ -1422,16 +1422,14 @@ body, div, ul, p {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%;
+  height: 100vh;
   width: 100%;
-  overflow: auto;
   z-index: 100;
   background-color: rgba(0, 0, 0, 0.5); }
   .modal .modal-content {
     display: flex;
     flex-direction: column;
-    margin: 20% auto;
-    padding: 20px;
+    margin: 10% auto;
     width: 70%;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
     background-color: #f4f4f4;
@@ -1441,10 +1439,18 @@ body, div, ul, p {
     -o-animation: bounce-in .3s forwards; }
   .modal .modal-content .top {
     display: flex;
-    flex-direction: column; }
+    flex-direction: column;
+    z-index: 6;
+    box-shadow: 0 25px 15px -15px rgba(0, 0, 0, 0.2); }
+  .modal .modal-content .bottom {
+    display: flex;
+    flex-direction: column;
+    margin: 25px 0 0 0;
+    z-index: 5; }
   .modal .modal-content header {
     display: flex;
-    justify-content: space-between; }
+    justify-content: space-between;
+    margin: 20px 20px 0 20px; }
   .modal .modal-content header .total-points {
     letter-spacing: .5px;
     color: #3399FF; }
@@ -1452,21 +1458,26 @@ body, div, ul, p {
     display: flex;
     align-self: center;
     color: #383838; }
-  .modal .modal-percentage .minus {
+  .modal .modal-percentage .minus, .modal .modal-percentage .add {
     border: none;
     outline: none;
     background: none;
     font-size: 3em;
+    border: 1px solid red;
     color: #383838; }
-    .modal .modal-percentage .minus:focus {
+    .modal .modal-percentage .minus:active, .modal .modal-percentage .add:active {
       color: #707070; }
-  .modal .modal-percentage .add {
+  .modal .list-minus, .modal .list-add {
     border: none;
     outline: none;
     background: none;
-    font-size: 3em;
+    font-size: 1em;
+    font-weight: bold;
+    margin: -3px 0 0 0;
+    height: 20px;
+    border: 1px solid red;
     color: #383838; }
-    .modal .modal-percentage .add:focus {
+    .modal .list-minus:active, .modal .list-add:active {
       color: #707070; }
   .modal .modal-content .account-name {
     text-align: center;
@@ -1476,11 +1487,32 @@ body, div, ul, p {
     flex-direction: column; }
   .modal .account-name + .modal-done {
     align-self: flex-end;
+    margin: 0 20px 20px 0;
     padding: 8px 12px;
     border: none;
     border-radius: 0;
     color: white;
     background-color: black; }
+  .modal .bottom .modal-account-list {
+    display: flex;
+    flex-flow: column wrap;
+    align-content: flex-start;
+    margin: 0 0 20px 20px;
+    max-height: 100px;
+    list-style-type: none; }
+    .modal .bottom .modal-account-list li {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 5px 20px; }
+    .modal .bottom .modal-account-list p {
+      align-self: flex-start; }
+    .modal .bottom .modal-account-list .bottom-account-name {
+      margin-right: 10px; }
+    .modal .bottom .modal-account-list .modal-list-percentage {
+      display: flex;
+      flex-direction: row;
+      align-self: flex-end; }
   .modal .modal-close {
     align-self: flex-end;
     color: #ccc;

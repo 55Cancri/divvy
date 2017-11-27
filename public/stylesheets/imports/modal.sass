@@ -5,17 +5,16 @@
   position: fixed
   top: 0
   left: 0
-  height: 100%
+  height: 100vh
   width: 100%
-  overflow: auto        // add scrollbars if needed
+  // overflow: auto        // add scrollbars if needed
   z-index: 100
   background-color: rgba(0, 0, 0, .5)
 
   .modal-content
     display: flex
     flex-direction: column
-    margin: 20% auto
-    padding: 20px
+    margin: 10% auto
     width: 70%
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, .2), 0 7px 20px 0 rgba(0, 0, 0, .17)
     background-color: #f4f4f4
@@ -24,14 +23,26 @@
   .modal-content .top
     display: flex
     flex-direction: column
+    z-index: 6
+    box-shadow: 0 25px 15px -15px rgba(0, 0, 0, .2);
+
+  .modal-content .bottom
+    display: flex
+    flex-direction: column
+    margin: 25px 0 0 0
+    z-index: 5
+
+
 
   .modal-content header
     display: flex
     justify-content: space-between
+    margin: 20px 20px 0 20px
 
   .modal-content header .total-points
     letter-spacing: .5px
     color: #3399FF
+
 
 
   .modal-percentage
@@ -39,22 +50,27 @@
     align-self: center
     color: $mine-shaft
 
-  .modal-percentage .minus
+  .modal-percentage .minus, .modal-percentage .add
     border: none
     outline: none
     background: none
     font-size: 3em
+    border: 1px solid red
     color: $mine-shaft
-    &:focus
+    &:active
       color: $dove-gray
 
-  .modal-percentage .add
+  .list-minus, .list-add
     border: none
     outline: none
     background: none
-    font-size: 3em
+    font-size: 1em
+    font-weight: bold
+    margin: -3px 0 0 0
+    height: 20px
+    border: 1px solid red
     color: $mine-shaft
-    &:focus
+    &:active
       color: $dove-gray
 
   .modal-content .account-name
@@ -67,11 +83,39 @@
 
   .account-name + .modal-done
     align-self: flex-end
+    margin: 0 20px 20px 0
     padding: 8px 12px
     border: none
     border-radius: 0
     color: white
     background-color: black
+
+
+  .bottom .modal-account-list
+    display: flex
+    flex-flow: column wrap
+    align-content: flex-start;
+    margin: 0 0 20px 20px
+    max-height: 100px
+    list-style-type: none
+    li
+      display: flex
+      flex-direction: row
+      justify-content: space-between
+      margin: 5px 20px
+
+    p
+      align-self: flex-start
+
+    .bottom-account-name
+      margin-right: 10px
+
+    .modal-list-percentage
+      display: flex
+      flex-direction: row
+      align-self: flex-end
+
+
 
 
 
