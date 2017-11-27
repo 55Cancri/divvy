@@ -2,6 +2,50 @@ extends layout
 
 block content
   include ./includes/header
+
+  -
+    let date = new Date()
+    let year = date.getFullYear()
+
   div(class="landing-container")
-    h1 welcome
-    p #{isAuthenticated}
+    heading
+      h1(class="landing-title") Take Control of Your Finances
+      p(class="login") login status:
+        span(class="status") &nbsp;#{isAuthenticated}
+
+    section
+      h2 Determine where your money goes
+      p #{company} divides your income into separate accounts based on a percentage that you assign. Each of your accounts correspond to different expenses.
+
+    section
+      h2 Be proactive, not reactive
+      p This method of predefining where your money will go when you recieve it allows unanticipated expenses to affect you less.
+
+    section
+      h2 Set and track financial goals
+      p #{company} allows you to create accounts where the money put in them can work towards some goal.
+
+
+
+    footer
+      div(class="footer")
+        div(class="footer-list")
+          header Product
+          ul
+            li: a(href="/pricing") Pricing
+            li: a(href="/pricing") How it Works
+
+        div(class="footer-list")
+          header Support
+          ul
+            li: a(href="/privacy_policy") Privacy Policy
+            li: a(href="/terms_of_service") Terms of Service
+
+        div(class="footer-list")
+          header Company
+          ul
+            li: a(href="/about") About
+            li: a(href="/careers") Careers
+            li: a(href="/contact") Contact
+      div(class="copyright")
+        p &copy; 2017-#{year} #{company}. All Rights Reserved.

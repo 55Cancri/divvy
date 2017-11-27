@@ -6,18 +6,22 @@
 @import "./imports/header"
 @import "./imports/accents"
 @import "./imports/animations"
+@import "./imports/variables"
+
+@import "./imports/landing"
+
 @import "./imports/input"
 @import "./imports/accounts-list"
+@import "./imports/modal"
 @import "./imports/sidebar"
+
 @import "./imports/settings"
 @import "./imports/users"
 @import "./imports/pop-messages"
 
 
-// @import "../modules"
 
 // universal
-
 body
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
 
@@ -27,7 +31,6 @@ body
   left: 0
   grid-template-columns: repeat(12, [col-start] 1fr)
   grid-gap: 20px
-  max-width: 1024px
   margin: 0 auto
 
 header
@@ -76,3 +79,6 @@ header
   .settings-container
     grid-column: col-start 4 / span 6
     grid-row: 2
+
+  .landing-container
+    grid-column: col-start 2 / span 10

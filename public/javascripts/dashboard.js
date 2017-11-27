@@ -53,6 +53,26 @@ window.addEventListener('load', () => {
   })
 
 
+  let addAccountButton = document.querySelector('.new-account')
+
+  // let editAccountButton = document.querySelector('.edit-account')
+
+  let modal = document.querySelector('.modal')
+  let modalCloseButton = document.querySelector('.modal-close')
+
+  addAccountButton.addEventListener('click', () => {
+    modal.style.display = "block"
+  })
+
+  modalCloseButton.addEventListener('click', () => {
+    modal.style.display = "none"
+  })
+
+  window.addEventListener('click', (e) => {
+    if (e.target == modal) {
+      modal.style.display = "none"
+    }
+  })
 
 
 })

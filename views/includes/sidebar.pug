@@ -1,59 +1,52 @@
 //- user "user" variable to access user, not local_data
 
--
-  function addZeroes(num) {
-      let value = Number(num)
-      let res = num.split(".")
-      if(num.indexOf('.') === -1) {
-          value = value.toFixed(2)
-          num = value.toString()
-      } else if (res[1].length < 3) {
-          value = value.toFixed(2)
-          num = value.toString()
-      }
-  return num
-  }
+if (user)
+  -
+    function addZeroes(num) {
+        let value = Number(num)
+        let res = num.split(".")
+        if(num.indexOf('.') === -1) {
+            value = value.toFixed(2)
+            num = value.toString()
+        } else if (res[1].length < 3) {
+            value = value.toFixed(2)
+            num = value.toString()
+        }
+    return num
+    }
 
-  var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
+    function numberWithCommas(x) {
+      var parts = x.toString().split(".");
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return parts.join(".");
+    }
+
+    var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
 
 
-  Date.prototype.getFormattedTime = function () {
-    let hours = this.getHours() == 0 ? "12" : this.getHours() > 12 ? this.getHours() - 12 : this.getHours()
-    let minutes = (this.getMinutes() < 10 ? "0" : "") + this.getMinutes()
-    let ampm = this.getHours() < 12 ? "AM" : "PM"
-    let formattedTime = hours + ":" + minutes + " " + ampm
-    return formattedTime
-  }
-
-  let infusions = user.infusions.reverse()
+    Date.prototype.getFormattedTime = function () {
+      let hours = this.getHours() == 0 ? "12" : this.getHours() > 12 ? this.getHours() - 12 : this.getHours()
+      let minutes = (this.getMinutes() < 10 ? "0" : "") + this.getMinutes()
+      let ampm = this.getHours() < 12 ? "AM" : "PM"
+      let formattedTime = hours + ":" + minutes + " " + ampm
+      return formattedTime
+    }
 
 input(type="checkbox" id="sidebar-toggler")
 
 div(class="sidebar")
   h2 Latest Infusions
   ul(class="infusions")
-    each val in infusions
-
-      - let amount = addZeroes(val.amount)
-      - let day = val.dateAdded.getDay()
-      - let month = monthNames[val.dateAdded.getMonth()]
-      - let year = val.dateAdded.getFullYear()
-      - let time = val.dateAdded.getFormattedTime()
-      - let newline =`\n`
-
-      li
-        p(class="money")= `+ $${amount}`
-        p(class="date")= `on ${newline} ${month} ${day}, ${year}`
-        p(class="time")= `at ${time}`
-    else
-      li There are no values
-
-
-//- div(class="sidebar")
-//-   h2 Latest Infusions
-//-   - var infusions = user.infusions.reverse()
-//-   ul(class="latest-injections-list")
-//-     each val in infusions
-//-       li= "+ $" + addZeroes(val.amount) + " on " + val.dateAdded.getHours() + ":" + val.dateAdded.getMinutes()
-//-     else
-//-       li There are no values
+    if (user)
+      -let infusions = user.infusions.reverse()
+      each val in infusions
+        -let zeros = addZeroes(val.amount)
+        -let amount = numberWithCommas(zeros)
+        -let day = val.dateAdded.getDay()
+        -let month = monthNames[val.dateAdded.getMonth()]
+        -let year = val.dateAdded.getFullYear()
+        -let time = val.dateAdded.getFormattedTime()
+        li
+          p(class="money")= `+ $${amount}`
+          p(class="date")= `on ${month} ${day}, ${year}`
+          p(class="time")= `at ${time}`

@@ -1,0 +1,70 @@
+
+.landing-container
+  display: flex
+  flex-direction: column
+
+.landing-container .landing-title
+  margin-bottom: 10px
+  text-align: center
+  color: $mine-shaft
+
+.landing-container .login
+  margin: 0 0 20px 0
+  text-align: center
+  color: $dove-gray
+
+.landing-container .status
+  color: darken(springgreen, 8%)
+
+.landing-container section h2
+  color: $mine-shaft
+
+.landing-container section p
+  line-height: 25px
+  color: $dove-gray
+
+
+
+.landing-container section:nth-of-type(1)
+  align-self: flex-start
+  width: 45%
+
+.landing-container section:nth-of-type(2)
+  align-self: flex-end
+  width: 45%
+
+.landing-container section:nth-of-type(3)
+  align-self: flex-start
+  width: 45%
+
+
+
+.landing-container .footer
+  display: flex
+  margin: 80px 0 0 0
+
+.landing-container .footer-list
+  flex: 1
+
+.landing-container .footer-list header
+  margin: 0 0 10px 0
+  letter-spacing: .5px
+  color: $mine-shaft
+
+.landing-container .footer-list ul
+  list-style-type: none
+
+.landing-container .footer-list li
+  margin: 5px 0
+
+.landing-container .footer-list a
+  text-decoration: none
+  color: $dove-gray
+  &:hover
+    color: darken($dove-gray, 30%)
+
+.landing-container .copyright
+  display: block
+  margin: 30px 0 20px 0
+  text-align: center
+  color: $dove-gray

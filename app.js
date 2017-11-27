@@ -66,6 +66,10 @@ app.use(sassMiddleware({
 }))
 app.use(express.static(path.join(__dirname, 'public')))
 
+// font awesome
+app.use('/static', express.static('./node_modules/font-awesome'))
+
+
 // required for flash messages to work
 app.use(session({
   secret: 'keyboard cat',

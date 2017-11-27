@@ -2,6 +2,25 @@ import express from 'express'
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
+let AccountSchema = new Schema ({
+  name: {
+    type: String,
+    trim: true
+  },
+  percent: {
+    type: Number,
+    min: 1,
+    max: 100
+  },
+  isGoal: {
+    type: Boolean,
+    default: false
+  },
+  accountHistory: {
+    type: Array
+  }
+})
+
 let UserSchema = new Schema ({
   username: {
     type: String,
@@ -21,7 +40,13 @@ let UserSchema = new Schema ({
     type: Array,
     timestamps: true
   },
-  accounts: [],
+  accounts: {
+    type: [AccountSchema],
+    count: {
+      type: Number,
+      default: 8
+    }
+  },
   secretToken: {
     type: String
   },

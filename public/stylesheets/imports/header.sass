@@ -1,4 +1,5 @@
 @import './animations'
+@import './variables'
 
 // universal navigation settings
 .landing-list, .nav-list
@@ -18,31 +19,33 @@
 
   .sidemenu-link
     margin: 0 0 0 20px
-    color: white
 
   .logo-link
     margin: 0 auto 0 20px
+    a
+      color: darken(springgreen, 8%)
+      &:visited
+        color: darken(springgreen, 8%)
 
 
 // navigation settings for landing page
 .landing-list
   background-color: white
   li a
-    color: black
     &:visited
-      color: black
+      color: $mine-shaft
     &:hover
-      color: gray
-
-  .signup-link
-    margin: 0 0 0 20px
+      color: darken(springgreen, 8%)
 
   .login-link
+    margin: 0 0 0 20px
+
+  .signup-link
     margin: 0 20px 0 20px
 
 
 // navigation settings for dashboard page
-.nav-list > li a
+.nav-list > li:not(.logo-link) a
   color: white
   &:hover
     color: lightgrey
@@ -69,6 +72,7 @@
     display: none
     position: absolute
     list-style-type: none
+    z-index: 10
 
   .sub-menu li
     &:first-of-type
@@ -80,17 +84,20 @@
     opacity: 0
     background-color: grey
     transform-origin: top center
-    @for $i from 1 through 2
+    @for $i from 1 through 20
       &:nth-of-type(#{$i})
         animation:
           name: flappers
-          duration: 300ms
-          delay: (300ms * $i) - 300
+          duration: 200ms
+          delay: (200ms * $i) - 200
           timing-function: ease-in-out
           fill-mode: forwards
+    &:hover
+          background-color: dimgray
 
   .sub-menu li a
     color: white
+
 
   // toggle this class on .sub-menu ul on username click
   .show

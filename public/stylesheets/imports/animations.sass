@@ -23,6 +23,19 @@
     opacity: 1
 
 
+@include keyframes(bounce-in)
+  0%
+    opacity: 0
+    transform: translate(0px, -100px)
+  50%
+    transform: translate(0px, 30px)
+  80%
+    transform: translate(0px, -10px)
+  100%
+    opacity: 1
+    transform: translate(0px, 0px)
+
+
 
 @include keyframes(turn-grey)
   0%

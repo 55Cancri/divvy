@@ -1,0 +1,84 @@
+@import './animations'
+
+.modal
+  display: none
+  position: fixed
+  top: 0
+  left: 0
+  height: 100%
+  width: 100%
+  overflow: auto        // add scrollbars if needed
+  z-index: 100
+  background-color: rgba(0, 0, 0, .5)
+
+  .modal-content
+    display: flex
+    flex-direction: column
+    margin: 20% auto
+    padding: 20px
+    width: 70%
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, .2), 0 7px 20px 0 rgba(0, 0, 0, .17)
+    background-color: #f4f4f4
+    @include animation('bounce-in .3s forwards')
+
+  .modal-content .top
+    display: flex
+    flex-direction: column
+
+  .modal-content header
+    display: flex
+    justify-content: space-between
+
+  .modal-content header .total-points
+    letter-spacing: .5px
+    color: #3399FF
+
+
+  .modal-percentage
+    display: flex
+    align-self: center
+    color: $mine-shaft
+
+  .modal-percentage .minus
+    border: none
+    outline: none
+    background: none
+    font-size: 3em
+    color: $mine-shaft
+    &:focus
+      color: $dove-gray
+
+  .modal-percentage .add
+    border: none
+    outline: none
+    background: none
+    font-size: 3em
+    color: $mine-shaft
+    &:focus
+      color: $dove-gray
+
+  .modal-content .account-name
+    text-align: center
+    color: $mine-shaft
+
+  .modal-content .submit
+    display: flex
+    flex-direction: column
+
+  .account-name + .modal-done
+    align-self: flex-end
+    padding: 8px 12px
+    border: none
+    border-radius: 0
+    color: white
+    background-color: black
+
+
+
+  .modal-close
+    align-self: flex-end
+    color: #ccc
+    font-size: 22px
+    &:hover
+      cursor: pointer
+      color: $dove-gray
