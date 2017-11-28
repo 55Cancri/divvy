@@ -14,9 +14,6 @@ body, div, ul, p {
 .accounts-list li {
   font: normal 1.7em din; }
 
-.accounts-list li:last-of-type {
-  font: italic 1.4em din; }
-
 .accounts-container p {
   font: normal 1.2em din; }
 
@@ -1176,9 +1173,6 @@ body, div, ul, p {
   padding: 5px 0;
   padding-left: 8%; }
 
-.accounts-list li:last-of-type {
-  padding: 10px 0 5px 40px; }
-
 .account .edit {
   position: absolute;
   top: 8px;
@@ -1750,6 +1744,8 @@ header {
     grid-column: col-start 4 / span 6;
     grid-row: 2; }
   .landing-container {
+    grid-column: col-start 2 / span 10; }
+  .account-container {
     grid-column: col-start 2 / span 10; } }
 
 /*# sourceMappingURL=style.css.map */

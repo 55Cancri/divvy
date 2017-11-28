@@ -29,4 +29,22 @@ header
 
         li: a(href="#"): i(class="fa fa-bell")
         li(class="settings-link"): a(href="/users/settings"): i(class="fa fa-cog")
+    - } else {
+      ul(class="nav-list")
+        li(class="sidemenu-link"): label(for="sidebar-toggler"): button(type="button" class="navbar-toggle collapsed" aria-controls="navbar")
+            span(class="icon-bar top-bar")
+            span(class="icon-bar middle-bar")
+            span(class="icon-bar bottom-bar")
+        li(class="logo-link"): a(href="/users/dashboard") Beam
+
+        li(class="drop-menu"): a(href="#") #{user.username}
+          div(class="drop-triangle")
+          ul(class="sub-menu")
+            li: a(href="/users/account") account
+            li: a(href="/users/goals") goals
+            li: a(href="/users/calendar") calendar
+            li: a(href="/users/logout") logout
+
+        li: a(href="#"): i(class="fa fa-bell")
+        li(class="settings-link"): a(href="/users/settings"): i(class="fa fa-cog")
     - }

@@ -1,25 +1,10 @@
 div(class="accounts-container")
   p Your Accounts
 
+  - var sideAccounts = user.accounts
   ul(class="accounts-list")
-    li(class="account turn-white") business
-      div(class="edit hidden") edit
-    li(class="account turn-white") car
-      div(class="edit hidden") edit
-    li(class="account turn-white") food
-      div(class="edit hidden") edit
-    li(class="account turn-white") investment
-      div(class="edit hidden") edit
-    li(class="account turn-white") rent
-      div(class="edit hidden") edit
-    li(class="account turn-white") spending
-      div(class="edit hidden") edit
-    li(class="account turn-white") emergency
-      div(class="edit hidden") edit
-    li(class="account turn-white") savings
-      div(class="edit hidden") edit
-    li(class="account turn-white") college
-      div(class="edit hidden") edit
-    li(class="account turn-white") + add account
+    each account in sideAccounts
+      li(class="account turn-white"): a(href="/funds/accounts/" + account._id)= account.accountName
+      //- div(class="edit hidden") edit
 
   button(class="new-account") + add account

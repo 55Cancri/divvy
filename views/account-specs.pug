@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  include ./includes/header
+  div(class="account-container")
+    h1= account.accountName
+    p= account.percent
+      span %
+
+    p= account.description
+
+    div(class="date-created")
+      p= account.createdAt

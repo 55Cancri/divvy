@@ -1,5 +1,6 @@
 window.addEventListener('load', () => {
 
+
   let accountListItems = [].slice.call(document.querySelectorAll('.account'))
 
   let accountEditItems = [].slice.call(document.querySelectorAll('.edit'))
@@ -79,21 +80,54 @@ window.addEventListener('load', () => {
 
 
 
+
+// modal account points
+  let total = []
+  let accounts = local_data.accounts
+  accounts.forEach((account, index) => {
+    total.push(account.percent)
+    console.log("account "+ index + ": " + account.percent)
+  })
+  let currentAccountPoints = total.reduce((a, b) => a + b, 0)
+  let remainingPoints = 100 - currentAccountPoints
+
+
+
+
   // modal interface
   let topPlusButton = document.querySelector('.percentage-div .add')
   let topMinusButton = document.querySelector('.percentage-div .minus')
   let topInput = document.querySelector('.enter-account-percentage')
+  let totalPoints = document.querySelector('.total-points')
 
   topPlusButton.addEventListener('click', (e) => {
     e.preventDefault()
     if (topInput.value < 99) {
       topInput.value = parseInt(topInput.value) + 1
+      fetch('/funds/points/inc',
+        { method: 'post'})
+      .then(res => {
+        return res.text()
+      })
+      .then(data => {
+        parsedData = JSON.parse(data)
+        console.log("Inc. from server: ", parsedData)
+      })
     }
   })
   topMinusButton.addEventListener('click', (e) => {
     e.preventDefault()
     if (topInput.value > 1) {
       topInput.value = parseInt(topInput.value) - 1
+      fetch('/funds/points/dec',
+        { method: 'post'})
+      .then(res => {
+        return res.text()
+      })
+      .then(data => {
+        parsedData = JSON.parse(data)
+        console.log("Inc. from server: ", parsedData)
+      })
     }
   })
 
@@ -108,7 +142,9 @@ window.addEventListener('load', () => {
   })
 
 
+
   // modal submission
+  let accountList = document.querySelector('.accounts-list')
   let createAccountForm = document.querySelector('.newAccount')
   let accountName = document.querySelector('.enter-account-name')
   let accountPercent = document.querySelector('.enter-account-percentage')
@@ -116,7 +152,6 @@ window.addEventListener('load', () => {
   createAccountForm.addEventListener('submit', (e) => {
     e.preventDefault()
     console.log('Initialize submission...')
-    modal.style.display = "none"
     fetch('/funds/new',
     {
       method: 'post',
@@ -135,7 +170,12 @@ window.addEventListener('load', () => {
     .then(data => {
       parsedData = JSON.parse(data)
       console.log("From server: ", parsedData)
-      alert("From server: ", parsedData)
+
+      let item = document.createElement('li')
+      let text = document.createTextNode(parsedData[parsedData.length - 1].accountName)
+      item.appendChild(text)
+      accountList.insertBefore(item, accountList.childNodes[0])
+      modal.style.display = "none"
     })
   })
 
