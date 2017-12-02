@@ -12,8 +12,11 @@
 
 @import "./imports/input"
 @import "./imports/accounts-list"
+@import "./imports/accounts-sum"
 @import "./imports/modal"
 @import "./imports/sidebar"
+
+@import "./imports/accounts-spec"
 
 @import "./imports/settings"
 @import "./imports/users"
@@ -32,6 +35,7 @@ body
   grid-template-columns: repeat(12, [col-start] 1fr)
   grid-gap: 20px
   margin: 0 auto
+  padding-bottom: 60px
 
 header
   grid-column: col-start / span 4
@@ -68,6 +72,9 @@ header
     grid-column: col-start 5 / span 6
     grid-row: 2
 
+  .total-cash-container
+    grid-column: col-start 5 / span 6
+
   .registration-container
     grid-column: col-start 4 / span 6
     grid-row: 8
@@ -83,5 +90,5 @@ header
   .landing-container
     grid-column: col-start 2 / span 10
 
-  .account-container
+  .accounts-page-container
     grid-column: col-start 2 / span 10

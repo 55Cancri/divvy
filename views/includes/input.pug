@@ -3,5 +3,5 @@ div(class="input-container")
     label(for="divvy") Enter amount
     div(class="merge-input")
       p(class="dollar-sign") $
-      input(type="text" name="divvy" class="injection-value" autocomplete="off")
-    button(type="submit" class="dispenser") dispense
+      input(class="injection-value" name="divvy" min="1" step=".01" type="number" autocomplete="off" required)
+    button(class="dispenser" disabled="true" type="submit") dispense

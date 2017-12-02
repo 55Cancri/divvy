@@ -1,0 +1,20 @@
+.accounts-page-container
+  .account-name
+    position: relative
+    &:hover
+      color: $mine-shaft
+      .edit
+        visibility: visible
+        &:hover
+          color: $mine-shaft
+
+  .edit
+    position: absolute
+    visibility: hidden
+    top: 12px
+    left: 120px
+    color: $dove-gray
+
+  .account-name-edit
+    width: 6ch
+    overflow: visible

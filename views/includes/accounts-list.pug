@@ -1,10 +1,9 @@
 div(class="accounts-container")
   p Your Accounts
 
+  button(class="new-account") + add account
   - var sideAccounts = user.accounts
   ul(class="accounts-list")
-    each account in sideAccounts
+    each account in sideAccounts.reverse()
       li(class="account turn-white"): a(href="/funds/accounts/" + account._id)= account.accountName
       //- div(class="edit hidden") edit
-
-  button(class="new-account") + add account

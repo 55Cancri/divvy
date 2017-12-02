@@ -109,6 +109,8 @@ app.use('/funds', funds)
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   let err = new Error('Not Found')
+  // you need, need, NEED this; add it!
+  console.log("Error middleware: ", err.message)
   err.status = 404
   next(err)
 })
@@ -118,6 +120,8 @@ app.use((req, res, next) => {
 if (app.get('env') === 'development') {
   app.use((err, req, res, next) => {
     res.status(err.status || 500)
+    // you need, need, NEED this; add it!
+    console.log("Error middleware: ", err.message)
     res.render('error', {
       message: err.message,
       error: err

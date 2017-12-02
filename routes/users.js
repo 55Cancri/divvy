@@ -280,9 +280,5 @@ router.post('/settings', (req, res, next) => {
 })
 
 
-
-
-
-
-
 export default router
+export { isAuthenticated, isNotAuthenticated, isAdmin }

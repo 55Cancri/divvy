@@ -27,7 +27,7 @@ if (user)
     Date.prototype.getFormattedTime = function () {
       let hours = this.getHours() == 0 ? "12" : this.getHours() > 12 ? this.getHours() - 12 : this.getHours()
       let minutes = (this.getMinutes() < 10 ? "0" : "") + this.getMinutes()
-      let ampm = this.getHours() < 12 ? "AM" : "PM"
+      let ampm = this.getHours() < 12 ? "am" : "pm"
       let formattedTime = hours + ":" + minutes + " " + ampm
       return formattedTime
     }
@@ -42,7 +42,7 @@ div(class="sidebar")
       each val in infusions
         -let zeros = addZeroes(val.amount)
         -let amount = numberWithCommas(zeros)
-        -let day = val.dateAdded.getDay()
+        -let day = val.dateAdded.getDate()
         -let month = monthNames[val.dateAdded.getMonth()]
         -let year = val.dateAdded.getFullYear()
         -let time = val.dateAdded.getFormattedTime()

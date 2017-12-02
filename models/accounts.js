@@ -15,6 +15,12 @@ let AccountSchema = new Schema ({
     max: 100,
     required: true
   },
+  amount: {
+    type: Number,
+    default: 0,
+    min: 0,
+    required: true
+  },
   description: {
     type: String,
   },
@@ -22,7 +28,7 @@ let AccountSchema = new Schema ({
     type: Boolean,
     default: false
   },
-  accountHistory: {
+  amountHistory: {
     type: Array,
   }
 }, {

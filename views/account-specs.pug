@@ -1,13 +1,61 @@
+//- while this route did send the "user" variable, it also
+//- sent the "account" variable, which is specific
 extends layout
 
 block content
   include ./includes/header
-  div(class="account-container")
-    h1= account.accountName
+
+  -
+    function numberWithCommas(x) {
+      var parts = x.toString().split(".");
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return parts.join(".");
+    }
+
+    var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
+
+    Date.prototype.getFormattedTime = function () {
+      let hours = this.getHours() == 0 ? "12" : this.getHours() > 12 ? this.getHours() - 12 : this.getHours()
+      let minutes = (this.getMinutes() < 10 ? "0" : "") + this.getMinutes()
+      let ampm = this.getHours() < 12 ? "am" : "pm"
+      let formattedTime = hours + ":" + minutes + " " + ampm
+      return formattedTime
+    }
+
+  div(class="accounts-page-container")
+    div(class="header")
+      div(class="account-name")= account.accountName
+        p(class="edit") edit
     p= account.percent
       span %
 
-    p= account.description
+    p $#{numberWithCommas(account.amount)}
+    p description: #{account.description}
+
+    div(class="infusions-div")
+      if (user.infusions.length > 0)
+        p recent infusions:
+        ul(class="recent-infusions")
+          each amount in account.amountHistory.reverse()
+            -let date = amount.dateRecieved
+            -let day = date.getDate()
+            -let month = monthNames[date.getMonth()]
+            -let year = date.getFullYear()
+            -let time = date.getFormattedTime()
+
+            li +$#{numberWithCommas(amount.amount)} added on #{month} #{day}, #{year} at #{time}
+      else
+        p You haven't added any money yet.
 
     div(class="date-created")
-      p= account.createdAt
+
+      -let date = account.createdAt
+      -let day = date.getDay()
+      -let month = monthNames[date.getMonth()]
+      -let year = date.getFullYear()
+      -let time = date.getFormattedTime()
+
+      p created on: #{month} #{day}, #{year}
+
+
+  script(src="/javascripts/account-spec.js")

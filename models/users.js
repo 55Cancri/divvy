@@ -27,12 +27,18 @@
       type: [AccountSchema],
       count: {
         type: Number,
-        default: 8
+        default: 0
       }
     },
     remainingPoints: {
       type: Number,
-      default: 100
+      default: 100,
+      min: 0,
+      max: 100
+    },
+    interest: {
+      type: Number,
+      default: .3
     },
     secretToken: {
       type: String
