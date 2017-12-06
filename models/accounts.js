@@ -23,6 +23,7 @@ let AccountSchema = new Schema ({
   },
   description: {
     type: String,
+    default: undefined
   },
   isGoal: {
     type: Boolean,

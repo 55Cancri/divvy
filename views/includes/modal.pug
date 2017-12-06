@@ -22,10 +22,11 @@ div(class="modal")
       - let modalAccounts = user.accounts
       ul(class="modal-account-list")
         each account in modalAccounts
+          - let id = account._id
           li
-            p(class="bottom-account-name")= account.accountName
+            p(class="bottom-account-name" id=`${id}`)= account.accountName
             div(class="modal-list-percentage")
-              button(class="list-minus") -
+              button(class="small-minus") -
               p(class="modal-list-number")= account.percent
                 span %
-              button(class="list-add") +
+              button(class="small-add") +

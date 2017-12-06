@@ -1,20 +1,61 @@
 .accounts-page-container
+  display: grid
+  grid-template-columns: repeat(12, [col-start] 1fr)
+  grid-gap: 20px
+
   .account-name
-    position: relative
     &:hover
       color: $mine-shaft
-      .edit
+      .edit-n
         visibility: visible
         &:hover
           color: $mine-shaft
 
-  .edit
-    position: absolute
+    .account-description
+      margin: 10px 0 0 0
+      padding: 5px
+      height: max-content
+      border-size: border-box
+      background-color: lightgray
+
+
+
+  .edit-n
+    display: inline-block
+    margin: 0 0 5px 10px
     visibility: hidden
-    top: 12px
-    left: 120px
+    vertical-align: middle
+    line-height: 1rem
     color: $dove-gray
 
-  .account-name-edit
-    width: 6ch
+  .account-desc
+    &:hover
+      color: $mine-shaft
+      .edit-d, .add-d
+        visibility: visible
+        &:hover
+          color: $mine-shaft
+
+  .edit-d, .add-d
+    display: inline-block
+    visibility: hidden
+    padding: 0 0 0 8px
+    color: $dove-gray
+
+  .account-description-edit
+    box-sizing: border-box
     overflow: visible
+    width: 150px
+    padding: 5px
+
+
+  .account-percent
+
+
+  .account-total
+    display: flex
+    flex-direction: row
+    justify-content: flex-end
+
+
+

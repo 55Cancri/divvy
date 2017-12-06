@@ -70,8 +70,10 @@ router.post('/infusions', (req, res, next) => {
       percentOfAccount = parseFloat(percentOfAccount)
       // 3. set final amount to variable
       let finalAccountAmount = roundTo((percentOfAccount * income), 2)
-      // 4. set account's total amount to final amout
-      item.amount += parseFloat(finalAccountAmount)
+      finalAccountAmount = parseFloat(finalAccountAmount)
+      // 4. set account's total amount to final amount
+      // toFixed should prevent save of long nums in db
+      item.amount += +(finalAccountAmount).toFixed(2)
       item.amountHistory.push({
         percent: item.percent,
         amount: finalAccountAmount,
@@ -184,7 +186,7 @@ router.put('/points/dec', (req, res, next) => {
 // update it to the new name
 router.put('/update/name', (req, res, next) => {
   User.update(
-    { 'accounts._id': req.body.pathid },
+    { 'accounts._id': req.body.path },
     { $set: { 'accounts.$.accountName': req.body.accountName }
   })
   .exec()
@@ -192,7 +194,7 @@ router.put('/update/name', (req, res, next) => {
   // first instance of it in the accounts array property
   .then((update) => {
     User.findOne(
-      { 'accounts._id': req.body.pathid },
+      { 'accounts._id': req.body.path },
       { 'accounts.$': 1 }
     )
     .exec()
@@ -209,81 +211,30 @@ router.put('/update/name', (req, res, next) => {
   })
 })
 
-
-// router.put('/update/name', (req, res, next) => {
-//   console.log("account id: ", req.body.pathid)
-//   User.findOne(
-//     { 'accounts._id': req.body.pathid },
-//     { 'accounts.$': 1 }
-//   )
-//   .exec()
-//   .then((account) => {
-//     console.log("old account name: ", account.accounts[0].accountName)
-//     account.accounts[0].accountName = req.body.accountName
-//     account.update()
-//     .then((update) => {
-//       res.json(update.accounts[0])
-//       console.log("new account name: ", update.accounts[0].accountName)
-//     })
-//     .catch((err) => {
-//       console.log("Error saving account: ", err)
-//     })
-//   })
-//   .catch((err) => {
-//     console.log("Error finding account: ", err)
-//   })
-// })
-
-
-
-//   .then((user) => {
-//     User.findOne(
-//       { 'accounts._id': req.body.pathid },
-//       { 'accounts.$': 1 }
-//     )
-//     .exec()
-//     .then((account) => {
-//       console.log("old account name: ", account.accounts[0].accountName)
-//       account.accounts[0].accountName = req.body.accountName
-//       user.save()
-//       .then(data => {
-//         console.log("save successful.", data)
-//         console.log("new account name: ", data.accounts[0].accountName)
-//       })
-//       .catch(err => console.log(err))
-//     })
-//     .catch(err => console.log(err))
-//   })
-//   .catch(err => console.log(err))
-// })
-
-
-//   })
-//   .then((account) => {
-//     console.log("old account name: ", account.accounts[0].accountName)
-//     account.accounts[0].accountName = req.body.accountName
-//     account.save()
-//     .then((update) => {
-//       res.json(update.accounts[0])
-//       console.log("new account name: ", update.accounts[0].accountName)
-//     })
-//     .catch((err) => {
-//       console.log("Error saving account: ", err)
-//     })
-//   })
-//   .catch((err) => {
-//     console.log("Error finding account: ", err)
-//   })
-// })
-
-
 router.put('/update/percent', (req, res, next) => {
 
 })
 
-router.put('/update/description', (req, res, next) => {
-
+// change "pathid" to "path" for others
+router.put('/edit/description', (req, res, next) => {
+  User.update(
+    { 'accounts._id': req.body.path },
+    { $set: { 'accounts.$.description': req.body.description }
+  })
+  .exec()
+  .then(update => {
+    User.findOne(
+      { 'accounts._id': req.body.path },
+      { 'accounts.$': 1 }
+    )
+    .then(result => {
+      res.json(result.accounts[0])
+    })
+    .catch(err => console.log("Error finding account: ", err))
+  })
+  .catch(err => console.log("Error updating description: ", err))
 })
+
 
 
 export default router

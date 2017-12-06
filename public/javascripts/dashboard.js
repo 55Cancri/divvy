@@ -33,28 +33,56 @@ window.addEventListener('load', () => {
 
 
   function animateResultCount(curr, target, elem) {
-    if(curr < target) {
-      let interval = setInterval(function() {
-        elem.textContent = "$" + numberWithCommas(curr)
-        if (curr >= target) {
-          clearInterval(interval)
-          return
-        }
-        curr++
-    }, 1)
-}
-if(target < curr) {
-    let interval = setInterval(function() {
-        elem.textContent = "$" + numberWithCommas(curr)
-        if (target >= curr) {
-          clearInterval(interval)
-          return
-        }
-        curr--
-      }, 1)
+    stringed = infusionAmount.value.toString()
+    if (stringed.indexOf('.') != -1) {
+      // index of decimal
+      let dot = stringed.indexOf('.')
+      // starting at index of decimal, get next 2 numbers
+      let decimal = +(stringed.substr(dot, 3))
+
+      if(curr < target) {
+        // let zero = (curr + decimal).toString()
+        // zero = (+(addZeroes(zero))).toFixed(2)
+        let interval = setInterval(function() {
+          withdot = +(curr + decimal)
+          withdot = withdot.toFixed(2)
+          let stringit = withdot.toString()
+          let zeroit = addZeroes(stringit)
+          elem.textContent = "$" + numberWithCommas(zeroit)
+          if (curr >= target) {
+            clearInterval(interval)
+            return
+          }
+          curr++
+        }, 1)
+      }
+    } else {
+      if(curr < target) {
+        let interval = setInterval(function() {
+          elem.textContent = "$" + numberWithCommas(curr)
+          if (curr >= target) {
+            clearInterval(interval)
+            return
+          }
+          curr++
+        }, 1)
+      }
     }
   }
 
+
+  function addZeroes(num) {
+    let value = Number(num)
+    let res = num.split(".")
+    if(num.indexOf('.') === -1) {
+      value = value.toFixed(2)
+      num = value.toString()
+    } else if (res[1].length < 3) {
+      value = value.toFixed(2)
+      num = value.toString()
+    }
+    return num
+  }
 
   function numberWithCommas(x) {
     var parts = x.toString().split(".");
@@ -102,6 +130,11 @@ if(target < curr) {
       if (newCashTotal - shaveDynamicCashTotal < 2000) {
         animateResultCount(shaveDynamicCashTotal, newCashTotal, dynamicCashTotal)
       } else {
+        console.log("shaveDynamicCashTotal (input): ", shaveDynamicCashTotal)
+
+        console.log("newCashTotal (server): ", newCashTotal)
+
+        console.log("newCashTotal - dynamicCashTotal: ", newCashTotal - shaveDynamicCashTotal)
         dynamicCashTotal.textContent = "$" + numberWithCommas(newCashTotal)
       }
       infusionAmount.value = ""
@@ -154,7 +187,7 @@ if(target < curr) {
 
 
 
-  // modal interface
+  // modal top interface
   let topPlusButton = document.querySelector('.percentage-div .add')
   let topMinusButton = document.querySelector('.percentage-div .minus')
   let percentInputField = document.querySelector('.enter-account-percentage')
@@ -291,4 +324,13 @@ if(target < curr) {
       alert("Haven't thought this one out too fully!")
     }
   })
+
+
+
+  let bottomPlusButton = document.querySelector('.small-plus')
+  let bottomMinusButton = document.querySelector('.small-minus')
+
+
+
+
 })
